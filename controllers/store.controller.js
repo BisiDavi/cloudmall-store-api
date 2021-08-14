@@ -10,20 +10,23 @@ exports.findStore = async (req,res) => {
 }
 
 exports.createStore = async (req,res) => {
-    const {name,email, phoneNumber, address, storeType, openingDays, storeImage} = req.body;
-    const checkForStore = await Store.findOne({email});
+    const {name,storeEmail, phoneNumber, address, storeType, openingDays, storeImage} = req.body;
+    const checkForStore = await Store.findOne({storeEmail});
+    const adminEmail = req.decoded.email;
+    console.log('adminEmail',adminEmail)
     try {
         if(checkForStore){
             return res.send("A store with that email exist.")
         }else{
             const store = new Store({
             name,
-            email,
+            storeEmail,
             phoneNumber,
             address,
             storeType,
             openingDays,
             storeImage,
+            adminEmail
             })        
             await store.save()
             res.send(store);

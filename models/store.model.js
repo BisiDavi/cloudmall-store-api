@@ -3,12 +3,13 @@ const Schema = mongoose.Schema;
 
 const StoreSchema = new Schema({
     name:String,
-    email:String,
+    storeEmail:String,
     phoneNumber:String,
     address:String,
     storeType:String,
-    openingDay:String,
-    storeImage:String,    
+    openingDays:String,
+    storeImage:String,   
+    adminEmail:String 
 }, {
     timestamps: true
 })

@@ -6,6 +6,8 @@ const StoreAdminSchema = new Schema({
     email: String,
     password: String,
     role: {type:String, default:'admin'}
+},{ 
+    timestamps:true
 })
 
 StoreAdminSchema.pre('save', function(next){

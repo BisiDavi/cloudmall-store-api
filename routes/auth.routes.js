@@ -1,11 +1,13 @@
-const authController = require('../controllers/login.controller');
+const loginController = require('../controllers/login.controller');
+const registerController = require('../controllers/register.controller');
+
 
 const authRoute = {
     login : (_router) => {
-        _router.post('/login', authController.login)
+        return _router.post('/login', loginController.login)
     },
     register : (_router) =>{
-        _router.post('/register', authController.register)
+       return  _router.post('/register', registerController.register)
     }
 }
 

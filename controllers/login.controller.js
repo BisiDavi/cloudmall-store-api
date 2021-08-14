@@ -2,7 +2,7 @@ const bcrypt  = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const StoreAdmin = require('../models/storeAdmin.model');
 
-const login = async (req,res) => {
+exports.login = async (req,res) => {
     try{
         const {email, password} = req.body;
 
@@ -38,5 +38,3 @@ const login = async (req,res) => {
         res.send(error);
     }
 }
-
-module.exports = login;

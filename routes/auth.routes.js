@@ -1,4 +1,4 @@
-const authController = require('../controllers/auth.controller');
+const authController = require('../controllers/login.controller');
 
 const authRoute = {
     login : (_router) => {

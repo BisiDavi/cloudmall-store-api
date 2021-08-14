@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require("mongoose");
 const cors = require('cors');
 const dotenv = require('dotenv');
+const appRoutes = require('./routes')
 
 dotenv.config();
 
@@ -25,7 +26,7 @@ app.get('/', (req,res) => {
     res.send("Welcome to Cloudmall Store API");
 });
 
-
+app.use('/', appRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

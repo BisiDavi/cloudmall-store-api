@@ -35,7 +35,7 @@ exports.register = async (req,res) => {
         const result = {
             token,
             email,
-            message: "registered as an admin"
+            message: "registeration successful"
         }
         await storeAdmin.save();
         res.send(result)

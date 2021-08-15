@@ -1,20 +1,20 @@
 const storeController = require('../controllers/store.controller');
 
 const storeRoutes = {   
-     getStores: (_router,validateToken) => {
-        return _router.get('/store', validateToken, storeController.findStore)
+     getStores: (_router,validateToken,decodeToken) => {
+        return _router.get('/store', validateToken,decodeToken, storeController.findStore)
     },
 
-     createStore: (_router,validateToken) => {
-       return _router.post('/store', validateToken, storeController.createStore)
+     createStore: (_router,validateToken,decodeToken) => {
+       return _router.post('/store', validateToken, decodeToken,storeController.createStore)
     },
 
-     patchStore: (_router,validateToken) => {
-       return _router.patch('/store', validateToken, storeController.editStore)
+     patchStore: (_router,validateToken,decodeToken) => {
+       return _router.patch('/store/:id', validateToken, decodeToken,storeController.editStore)
     },
 
-     deleteStore: (_router,validateToken) => {
-       return _router.delete('/store',validateToken, storeController.deleteStore)
+     deleteStore: (_router,validateToken,decodeToken) => {
+       return _router.delete('/store/:id',validateToken,decodeToken, storeController.deleteStore)
     },
 }
 

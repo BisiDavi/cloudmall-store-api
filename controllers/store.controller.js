@@ -2,7 +2,7 @@ const Store = require('../models/store.model');
 
 exports.findStore = async (req,res) => {
     try{
-        const availableStores = Store.find();
+        const availableStores = await Store.find();
         res.status(200).send({availableStores})
     }catch(error){
         res.status(500).send({error, message:"unable to fetch available stores."})
@@ -11,13 +11,13 @@ exports.findStore = async (req,res) => {
 
 exports.createStore = async (req,res) => {
     const {name,storeEmail, phoneNumber, address, storeType, openingDays, storeImage} = req.body;
-    const checkForStore = await Store.findOne({storeEmail});
+    if(storeEmail === undefined){
+        return res.send("Store email cannot be blank")
+    }
+    const checkForStore =await Store.find({storeEmail});
     const adminEmail = req.decoded.email;
-    console.log('adminEmail',adminEmail)
     try {
-        if(checkForStore){
-            return res.send("A store with that email exist.")
-        }else{
+        if(checkForStore.length === 0){
             const store = new Store({
             name,
             storeEmail,
@@ -30,6 +30,9 @@ exports.createStore = async (req,res) => {
             })        
             await store.save()
             res.send(store);
+        }else{
+            return res.send("A store with that email exist.")
+            
         }
     }catch(error){
         console.log('error',error);
@@ -54,7 +57,7 @@ exports.editStore = async (req,res) => {
 exports.deleteStore = async (req,res) => {
     try{
         await Store.deleteOne({_id:req.params.id});
-        return res.status(204).send({message:"store deleted"})
+        return res.send({message:"store deleted"})
     }catch(error){
         return res.status(400).send({message:"Cannot delete store", error})
     }

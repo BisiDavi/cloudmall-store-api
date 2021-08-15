@@ -20,6 +20,7 @@ mongoose.connect(process.env.MONGODB_URL,{
     console.log('mongoose, connected');
 }).catch((error) => {
     console.error('error', error);
+    throw new Error(error)
 })
 
 app.get('/', (req,res) => {

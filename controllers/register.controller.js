@@ -12,13 +12,15 @@ exports.register = async (req,res) => {
             return res.send("Email exist, please login or click on forgot password to change password")            
         }
 
+        if(email === undefined || password === undefined){
+            return res.send("Email and Password required");
+        }
+
         const storeAdmin  = new StoreAdmin({
             email,
             password,
 
         })
-
-        await storeAdmin.save();
         const payload = {
             email,
             role:"admin",
@@ -33,8 +35,9 @@ exports.register = async (req,res) => {
         const result = {
             token,
             email,
-            message: "register as an admin"
+            message: "registered as an admin"
         }
+        await storeAdmin.save();
         res.send(result)
 
     }catch(error){

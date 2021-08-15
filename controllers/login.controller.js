@@ -3,12 +3,9 @@ const jwt = require('jsonwebtoken');
 const StoreAdmin = require('../models/storeAdmin.model');
 
 exports.login = async (req,res) => {
+    let result = {};    
     try{
         const {email, password} = req.body;
-
-        let result ;
-        console.log('email',email)
-        console.log('password',password)
 
         await StoreAdmin.findOne({email}, (err, storeAdmin) => {
             if(err){
@@ -27,7 +24,7 @@ exports.login = async (req,res) => {
                     }
                     const secret = process.env.JWT_SECRET;
                     const token =  jwt.sign(payload, secret, options);
-                    result.token = token;
+                    if(token) result.token = token;
                     result.message = "logged in as an admin";
                     result.data = storeAdmin;
                     return res.send(result);

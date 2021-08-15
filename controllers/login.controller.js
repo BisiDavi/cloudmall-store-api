@@ -29,7 +29,7 @@ exports.login = async (req,res) => {
                     result.data = storeAdmin;
                     return res.send(result);
                 }else{
-                    return res.send({err, message:"wrong credentials"})
+                    return res.status(400).send({err, message:"wrong credentials !"})
                 }
             })
         })        

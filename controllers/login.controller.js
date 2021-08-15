@@ -7,15 +7,18 @@ exports.login = async (req,res) => {
         const {email, password} = req.body;
 
         let result ;
+        console.log('email',email)
+        console.log('password',password)
+
         await StoreAdmin.findOne({email}, (err, storeAdmin) => {
             if(err){
                 result.error = `User doesn't exist, please register as an admin, ${err}`
              return  res.send(result)
             }
-            bcrypt.compare(password, storeAdmin.password).then((match) => {
+            bcrypt.compare(password, storeAdmin.password).then((match,err) => {
                 if(match){
                     const payload  = {
-                        email: storeAdmin.email,
+                        email,
                         role:"admin"
                     }
                     const options =  {
@@ -28,11 +31,11 @@ exports.login = async (req,res) => {
                     result.message = "logged in as an admin";
                     result.data = storeAdmin;
                     return res.send(result);
+                }else{
+                    return res.send({err, message:"wrong credentials"})
                 }
             })
-        })
-        
-
+        })        
     }catch(error){
         console.error('error', error);
         res.send(error);

@@ -9,7 +9,7 @@ exports.register = async (req,res) => {
         console.log('doesAdminEmailExist',doesAdminEmailExist);
 
         if(doesAdminEmailExist){
-            return res.send("Email exist, please login or click on forgot password to change password")            
+            return res.status(400).send({message:"Email exist, please login or click on forgot password to change password"})            
         }
 
         if(email === undefined || password === undefined){
@@ -38,7 +38,7 @@ exports.register = async (req,res) => {
             message: "registeration successful"
         }
         await storeAdmin.save();
-        res.send(result)
+        res.status(200).send(result)
 
     }catch(error){
         return res.send(error);

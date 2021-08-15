@@ -25,7 +25,7 @@ exports.login = async (req,res) => {
                     const secret = process.env.JWT_SECRET;
                     const token =  jwt.sign(payload, secret, options);
                     if(token) result.token = token;
-                    result.message = "logged in as an admin";
+                    result.message = "login successful, logged in as an admin";
                     result.data = storeAdmin;
                     return res.send(result);
                 }else{

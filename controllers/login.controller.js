@@ -9,11 +9,16 @@ exports.login = async (req, res) => {
 
     await StoreAdmin.findOne({ email }, (err, storeAdmin) => {
       console.log("storeAdmin", storeAdmin);
+      if (storeAdmin === null) {
+        result.message = `User doesn't exist, please register as an admin`;
+        return res.send(result);
+      }
+
       if (err) {
         result.error = `User doesn't exist, please register as an admin, ${err}`;
         return res.send(result);
       }
-      bcrypt.compare(password, storeAdmin?.password).then((match, err) => {
+      bcrypt.compare(password, storeAdmin.password).then((match, err) => {
         if (match) {
           const payload = {
             email,

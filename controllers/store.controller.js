@@ -26,7 +26,6 @@ exports.createStore = async (req, res) => {
   }
   try {
     const checkForStore = await Store.find({ storeEmail });
-    console.log("checkForStore", checkForStore.length);
     const adminEmail = req.decoded.email;
     if (checkForStore.length === 0) {
       const store = new Store({

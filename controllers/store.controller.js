@@ -27,7 +27,7 @@ exports.createStore = async (req, res) => {
     return res.send("Store email cannot be blank");
   }
   const checkForStore = await Store.find({ storeEmail });
-  console.log("checkForStore", checkForStore);
+  console.log("checkForStore", checkForStore.length);
   const adminEmail = req.decoded.email;
   try {
     if (checkForStore.length === 0) {

@@ -41,7 +41,7 @@ exports.createStore = async (req, res) => {
       await store.save();
       res.send(store);
     } else {
-      return res.send("A store with that email exist.");
+      return res.status(400).send("A store with that email exist.");
     }
   } catch (error) {
     console.log("error", error);

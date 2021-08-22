@@ -21,15 +21,13 @@ exports.createStore = async (req, res) => {
     openingDays,
     storeImage,
   } = req.body;
-  console.log("req.body", req.body);
-  console.log("storeEmail", req.body.storeEmail);
   if (storeEmail === undefined) {
     return res.send("Store email cannot be blank");
   }
-  const checkForStore = await Store.find({ storeEmail });
-  console.log("checkForStore", checkForStore.length);
-  const adminEmail = req.decoded.email;
   try {
+    const checkForStore = await Store.find({ storeEmail });
+    console.log("checkForStore", checkForStore.length);
+    const adminEmail = req.decoded.email;
     if (checkForStore.length === 0) {
       const store = new Store({
         name,

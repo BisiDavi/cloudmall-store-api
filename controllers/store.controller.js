@@ -22,8 +22,8 @@ exports.createStore = async (req, res) => {
     storeImage,
   } = req.body;
   console.log("req.body", req.body);
-  console.log("storeEmail", storeEmail);
-  if (storeEmail === null) {
+  console.log("storeEmail", req.body.storeEmail);
+  if (storeEmail === undefined) {
     return res.send("Store email cannot be blank");
   }
   const checkForStore = await Store.find({ storeEmail });

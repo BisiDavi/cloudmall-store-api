@@ -13,10 +13,10 @@ exports.findStore = async (req, res) => {
 
 exports.createStore = async (req, res) => {
   const {
-    name,
+    storeName,
     storeEmail,
     phoneNumber,
-    address,
+    storeAddress,
     storeType,
     openingDays,
     storeImage,
@@ -29,10 +29,10 @@ exports.createStore = async (req, res) => {
     const adminEmail = req.decoded.email;
     if (checkForStore.length === 0) {
       const store = new Store({
-        name,
+        storeName,
         storeEmail,
         phoneNumber,
-        address,
+        storeAddress,
         storeType,
         openingDays,
         storeImage,

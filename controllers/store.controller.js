@@ -20,6 +20,10 @@ exports.createStore = async (req, res) => {
     storeType,
     openingDays,
     storeImage,
+    settlementPlan,
+    bankName,
+    accountNumber,
+    accountName,
   } = req.body;
   if (storeEmail === undefined) {
     return res.status(400).send("Store email cannot be blank");
@@ -37,6 +41,10 @@ exports.createStore = async (req, res) => {
         openingDays,
         storeImage,
         adminEmail,
+        settlementPlan,
+        bankName,
+        accountNumber,
+        accountName,
       });
       await store.save();
       res.send(store);

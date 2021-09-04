@@ -35,7 +35,7 @@ exports.register = async (req,res) => {
         const result = {
             token,
             email,
-            message: "registeration successful"
+            message: "registration successful"
         }
         await storeAdmin.save();
         res.status(200).send(result)

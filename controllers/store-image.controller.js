@@ -23,12 +23,3 @@ exports.uploadStoreImage = () => {
   const upload = multer({ storage: storage });
   return upload;
 };
-
-//   _app.post(
-//     "/",
-//     upload.single("picture", async (req, res) => {
-//       StoreAdmin.create({
-//         image: req.file.path,
-//       });
-//     })
-//   );
